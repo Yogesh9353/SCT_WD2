@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url('watch.webp'); /* Set your background image */
+    background-size: cover; /* Cover the entire screen */
+    background-position: center center; /* Center the background image */
+    background-attachment: fixed; /* Ensure the image stays fixed while scrolling */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Make sure the body takes full height of the screen */
+}
