@@ -8,18 +8,36 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f0f8ff;
+            background-image: url('watch.webp'); /* Add your background image */
+            background-size: cover; /* Cover the entire screen */
+            background-position: center center; /* Center the image */
+            background-attachment: fixed; /* Fix the background image */
+            background-repeat: no-repeat; /* Prevent repeating the image */
             margin: 0;
             padding: 0;
+            height: 100vh; /* Make sure the body takes full height of the screen */
         }
+
+        h1 {
+            color: white; /* Change the text color to white */
+            font-size: 3em; /* Adjust the font size */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for visibility */
+        }
+
         .stopwatch {
             margin-top: 100px;
+            z-index: 1;
+            position: relative;
         }
+
         .display {
             font-size: 2em;
             margin: 20px 0;
-            color: #333;
+            color: white; /* Change the text color to white */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: add shadow for better visibility */
         }
+
         .buttons button {
             font-size: 1em;
             padding: 10px 20px;
@@ -30,9 +48,11 @@
             background-color: #4CAF50;
             color: white;
         }
+
         .buttons button:hover {
             background-color: #45a049;
         }
+
         .buttons button:active {
             background-color: #3e8e41;
         }
@@ -48,6 +68,7 @@
             <button onclick="reset()">Reset</button>
         </div>
     </div>
+
     <script>
         let startTime;
         let elapsedTime = 0;
@@ -58,7 +79,7 @@
             const mins = String(Math.floor((time % 3600000) / 60000)).padStart(2, '0');
             const secs = String(Math.floor((time % 60000) / 1000)).padStart(2, '0');
             const millis = String(Math.floor((time % 1000) / 10)).padStart(2, '0'); // Only two digits for milliseconds
-            return ${hrs}:${mins}:${secs}:${millis};
+            return `${hrs}:${mins}:${secs}:${millis}`;
         }
 
         function updateDisplay() {
