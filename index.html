@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .stopwatch {
+            margin-top: 100px;
+        }
+        .display {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #333;
+        }
+        .buttons button {
+            font-size: 1em;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .buttons button:hover {
+            background-color: #45a049;
+        }
+        .buttons button:active {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="stopwatch">
+        <h1>Stopwatch</h1>
+        <div class="display" id="display">00:00:00:00</div>
+        <div class="buttons">
+            <button onclick="start()">Start</button>
+            <button onclick="stop()">Stop</button>
+            <button onclick="reset()">Reset</button>
+        </div>
+    </div>
+    <script>
+        let startTime;
+        let elapsedTime = 0;
+        let timerInterval;
+
+        function formatTime(time) {
+            const hrs = String(Math.floor(time / 3600000)).padStart(2, '0');
+            const mins = String(Math.floor((time % 3600000) / 60000)).padStart(2, '0');
+            const secs = String(Math.floor((time % 60000) / 1000)).padStart(2, '0');
+            const millis = String(Math.floor((time % 1000) / 10)).padStart(2, '0'); // Only two digits for milliseconds
+            return ${hrs}:${mins}:${secs}:${millis};
+        }
+
+        function updateDisplay() {
+            const currentTime = Date.now();
+            const timeDiff = elapsedTime + (currentTime - startTime);
+            document.getElementById('display').textContent = formatTime(timeDiff);
+        }
+
+        function start() {
+            if (!timerInterval) {
+                startTime = Date.now();
+                timerInterval = setInterval(updateDisplay, 10); // Update every 10 milliseconds
+            }
+        }
+
+        function stop() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                elapsedTime += Date.now() - startTime;
+                timerInterval = null;
+            }
+        }
+
+        function reset() {
+            stop();
+            elapsedTime = 0;
+            document.getElementById('display').textContent = "00:00:00:00";
+        }
+    </script>
+</body>
+</html>
